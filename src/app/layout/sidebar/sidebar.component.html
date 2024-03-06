@@ -1,0 +1,8 @@
+<ul class="list-group">
+  <app-menu-item
+    *ngFor="let item of menuItems"
+    [link]="item.routerLink"
+    [icon]="item.icon"
+    [label]="item.label"
+  ></app-menu-item>
+</ul>
