@@ -1,1 +1,12 @@
-<p>user-modal works!</p>
+<form [formGroup]="userForm">
+  <app-custom-modal
+    [loading]="isLoading"
+    [visible]="isOpen"
+    [style]="{ width: '450px' }"
+    [header]="header"
+    class="p-fluid"
+    (visibleChange)="hideDialog()"
+    (submitForm)="submit()"
+    (hide)="hideDialog()"
+  ></app-custom-modal>
+</form>

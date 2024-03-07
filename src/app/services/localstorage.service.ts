@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/models/user';
+import { Router } from '@angular/router';
 
 const TOKEN = 'jwtToken';
 const USER = 'user';
@@ -7,7 +8,7 @@ const USER = 'user';
   providedIn: 'root',
 })
 export class LocalStorageService {
-  constructor() {}
+  constructor(private router: Router) {}
   token?: string;
   user?: User;
 
@@ -40,5 +41,10 @@ export class LocalStorageService {
   removeUser() {
     localStorage.removeItem(USER);
     this.user = undefined;
+  }
+  logout() {
+    this.removeToken();
+    this.removeUser();
+    this.router.navigate(['login']);
   }
 }

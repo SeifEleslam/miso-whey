@@ -27,16 +27,20 @@ export class LoginComponent {
   });
   email_pattern = EMAIL_PATTERN;
   companyLogoUrl = COMPANY_LOGO;
+  isLoading = false;
   onSubmit() {
     // TODO: Use EventEmitter with form value
     if (this.loginForm.invalid) return;
     console.log(this.loginForm.value);
-
-    this.auth.login(this.loginForm.value as Login).subscribe({
-      next: (val) => {
-        this.storage.setToken(val.token);
-        this.router.navigate(['/']);
-      },
-    });
+    this.isLoading = true;
+    this.auth
+      .login(this.loginForm.value as Login)
+      .subscribe({
+        next: (val) => {
+          this.storage.setToken(val.token);
+          this.router.navigate(['/']);
+        },
+      })
+      .add(() => (this.isLoading = false));
   }
 }

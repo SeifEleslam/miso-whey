@@ -13,8 +13,6 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler) {
     const token = this.localstorageToken.getToken();
     const isAPIUrl = request.url.includes('/api');
-    console.log('test');
-
     if (token && isAPIUrl) {
       request = request.clone({
         setHeaders: {

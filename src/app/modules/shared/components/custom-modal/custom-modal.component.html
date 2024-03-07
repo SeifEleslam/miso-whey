@@ -1,0 +1,34 @@
+<p>custom-modal works!</p>
+<p-dialog
+  [modal]="true"
+  [visible]="visible"
+  (visibleChange)="hideDialog()"
+  [style]="style"
+  [header]="header"
+>
+  <ng-template pTemplate="content">
+    <ng-content></ng-content>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      type="button"
+      pButton
+      pRipple
+      [label]="'Cancel'"
+      icon="bi bi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+      [disabled]="loading"
+    ></button>
+    <button
+      type="submit"
+      pButton
+      pRipple
+      [label]="'Save'"
+      icon="bi bi-check"
+      class="p-button-text"
+      [loading]="loading"
+    ></button>
+  </ng-template>
+</p-dialog>

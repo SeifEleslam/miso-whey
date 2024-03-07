@@ -1,0 +1,18 @@
+<div class="card shadow">
+  <div class="p-3">
+    <h5>Locations Allowed</h5>
+  </div>
+  <google-map
+    width="100%"
+    [center]="{ lat: 30.084234, lng: 31.338032 }"
+    [zoom]="13"
+  >
+    <map-marker
+      *ngFor="let location of locations"
+      [position]="location"
+    ></map-marker>
+    <!-- @if (directionsResults$ | async; as directionsResults) {
+    <map-directions-renderer [directions]="directionsResults" />
+    } -->
+  </google-map>
+</div>

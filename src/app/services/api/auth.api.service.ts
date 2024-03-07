@@ -9,12 +9,7 @@ import { Login, LoginOut } from '../../interfaces/models/auth';
 export class AuthService {
   loginEP = 'Auth/login';
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private localstorage: LocalStorageService,
-    private api: MainApiService
-  ) {}
+  constructor(private api: MainApiService) {}
 
   login({ email, password }: Login) {
     return this.api.fetchData<Login, LoginOut>(
@@ -26,11 +21,5 @@ export class AuthService {
         password,
       }
     );
-  }
-
-  logout() {
-    this.localstorage.removeToken();
-    this.localstorage.removeUser();
-    this.router.navigate(['login']);
   }
 }

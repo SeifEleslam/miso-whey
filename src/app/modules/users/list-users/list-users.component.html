@@ -1,1 +1,9 @@
-<p>list-users works!</p>
+<app-custom-table
+  key="id"
+  title="Users"
+  [cols]="cols"
+  [items]="users"
+  [isLoading]="isLoading"
+  (delete)="deleteUser($event)"
+  (edit)="editUser($event)"
+></app-custom-table>

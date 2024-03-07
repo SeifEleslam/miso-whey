@@ -1,0 +1,118 @@
+<div class="border bg-white">
+  <p-table
+    #dt1
+    [value]="items"
+    responsiveLayout="scroll"
+    [(selection)]="selectedItems"
+    [rowHover]="true"
+    [dataKey]="key"
+    [loading]="isLoading"
+    [lazy]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div
+        class="d-flex flex-column md:flex-row md:justify-content-between md:align-items-center"
+      >
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h5 class="m-0">{{ title ? title : "" }}</h5>
+
+          <span class="p-input-icon-left ml-auto">
+            <i class="bi bi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+              placeholder="Search keyword"
+            />
+          </span>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr *ngIf="items?.length">
+        <th
+          style="text-align: center"
+          *ngFor="let col of cols"
+          [pSortableColumn]="col.sortable ? col.field : undefined"
+        >
+          {{ col.header }}
+          <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+        </th>
+        <th style="text-align: center">Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td
+          *ngFor="let col of cols"
+          style="width: 14%; min-width: 10rem; text-align: center"
+        >
+          <span class="p-column-title">{{ col.header }}</span>
+          <div *ngIf="imgFields.includes(col.field)">
+            <img
+              *ngIf="item[col.field]"
+              [src]="item[col.field] ? item[col.field] : ''"
+              alt="image"
+              width="100"
+              class="shadow-4"
+            />
+            <p *ngIf="!item[col.field]">ــــــــــ</p>
+          </div>
+          <p *ngIf="!imgFields.includes(col.field)">
+            {{ item[col.field] }}
+          </p>
+        </td>
+
+        <td style="width: 14%; min-width: 10rem; text-align: center">
+          <div class="flex justify-content-center">
+            <button
+              pButton
+              pRipple
+              style="font-size: 20px"
+              icon="bi bi-eye"
+              class="p-button-link rounded-circle text-info"
+              (click)="showProduct(item)"
+            ></button>
+            <button
+              pButton
+              pRipple
+              style="font-size: 20px"
+              icon="bi bi-pencil-square"
+              class="p-button-link rounded-circle text-warning"
+              (click)="editProduct(item[key])"
+            ></button>
+            <button
+              pButton
+              pRipple
+              style="font-size: 20px"
+              icon="bi bi-trash"
+              class="p-button-link rounded-circle text-danger"
+              (click)="deleteTrigger(item)"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <div
+        style="
+          text-align: center;
+          color: #aaa;
+          padding-top: 100px;
+          padding-bottom: 100px;
+        "
+        class="flex w-full justify-content-center align-items-center"
+      >
+        <i class="bi bi-exclamation-triangle mx-2" style="font-size: 75px"></i>
+        <h1>No Data Found</h1>
+      </div>
+    </ng-template>
+  </p-table>
+</div>

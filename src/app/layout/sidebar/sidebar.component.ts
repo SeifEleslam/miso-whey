@@ -20,7 +20,7 @@ export class SidebarComponent {
     },
     {
       label: 'Users',
-      icon: 'bi bi-clipboard-data',
+      icon: 'bi bi-people',
       routerLink: ['users'],
     },
   ];
