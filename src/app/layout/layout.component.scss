@@ -1,0 +1,19 @@
+@media screen and (max-width: 720px) {
+  #sidebar {
+    position: absolute !important;
+    top: 70px !important;
+    border-radius: 0;
+    // left: -1.5rem !important;
+    height: calc(100vh - 111px);
+  }
+  .menu-close {
+    transform: translate(-240px) !important;
+  }
+}
+
+#sidebar {
+  z-index: 100;
+  width: 220px !important;
+  overflow: auto;
+  transition: all 0.3s ease-in-out;
+}

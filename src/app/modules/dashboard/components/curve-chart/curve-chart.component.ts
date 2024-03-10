@@ -27,8 +27,6 @@ export class CurveChartComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.charts.usersChartData().subscribe({
       next: (data) => {
-        console.log(data);
-
         const users = data.data.map((el) => el.numberOfUsers);
         const labels = data.data.map((el) => el.month);
         const controller = this.chart?.data ?? this.barChartData;

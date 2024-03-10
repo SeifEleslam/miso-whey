@@ -1,12 +1,126 @@
-<form [formGroup]="userForm">
+<form [formGroup]="userForm" (ngSubmit)="submit()">
   <app-custom-modal
     [loading]="isLoading"
     [visible]="isOpen"
-    [style]="{ width: '450px' }"
+    [style]="{ width: '650px' }"
     [header]="header"
     class="p-fluid"
     (visibleChange)="hideDialog()"
     (submitForm)="submit()"
     (hide)="hideDialog()"
-  ></app-custom-modal>
+    [noChange]="noChange"
+    [noFooter]="_approach === 'show'"
+  >
+    <div
+      style="display: flex; justify-content: center"
+      *ngIf="_approach === 'show'"
+    >
+      <img
+        [src]="imageURL ?? userForm.value['url']"
+        width="150px"
+        height="150px"
+        class="rounded-circle border"
+      />
+    </div>
+    <div
+      class="d-flex gap-2 align-items-center"
+      *ngIf="_approach === 'create' || _approach === 'edit'"
+    >
+      <div style="position: relative">
+        <img
+          [src]="imageURL ?? userForm.value['url']"
+          width="80px"
+          height="80px"
+          class="rounded-circle border"
+        />
+        <button
+          type="button"
+          (click)="removeImg()"
+          *ngIf="userForm.value['File'] || userForm.value['url']"
+          pButton
+          icon="bi bi-trash"
+          style="
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+          "
+          class="text-danger border-danger bg-white p-0 rounded-circle"
+        ></button>
+      </div>
+      <div class="d-flex flex-column">
+        <label
+          type="button"
+          style="
+            border-radius: 999px;
+            font-size: small;
+            padding: 5px 10px;
+            width: fit-content;
+          "
+          pButton
+          label="Upload Image"
+          class="border text-dark border-dark bg-white"
+          icon="bi bi-image"
+        >
+          <input
+            type="file"
+            (change)="uploadImg($event)"
+            name="photo"
+            accept="image/*"
+            style="display: none"
+          />
+        </label>
+        <small style="font-size: smaller; color: gray"
+          >At least 250*250 px PNG or JPG file</small
+        >
+      </div>
+    </div>
+    <br />
+    <div style="display: flex; gap: 20px">
+      <app-text-input
+        [required]="true"
+        [title]="'Full Name'"
+        [control]="userForm.controls['Name']"
+        style="flex: 1"
+        [submitted]="submitted"
+      >
+        <app-valid-hint [isVisible]="true">Name is required</app-valid-hint>
+      </app-text-input>
+      <app-text-input
+        [required]="_approach === 'create'"
+        [title]="'User Name'"
+        [control]="userForm.controls['UserName']"
+        style="flex: 1"
+        [submitted]="submitted"
+      >
+        <app-valid-hint [isVisible]="true"
+          >User Name is required</app-valid-hint
+        >
+      </app-text-input>
+    </div>
+    <br />
+    <div style="display: flex; gap: 20px">
+      <app-text-input
+        [pattern]="email_pattern"
+        [required]="true"
+        [title]="'Email'"
+        [control]="userForm.controls['Email']"
+        style="flex: 1"
+        [submitted]="submitted"
+      >
+        <app-valid-hint [isVisible]="true">Email is required</app-valid-hint>
+      </app-text-input>
+      <app-text-input
+        [required]="true"
+        [title]="'Password'"
+        type="password"
+        [control]="userForm.controls['Password']"
+        style="flex: 1"
+        [submitted]="submitted"
+      >
+        <app-valid-hint [isVisible]="true">Password is required</app-valid-hint>
+      </app-text-input>
+    </div>
+  </app-custom-modal>
 </form>

@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-custom-modal',
-
   templateUrl: './custom-modal.component.html',
   styleUrl: './custom-modal.component.scss',
 })
@@ -15,15 +14,18 @@ export class CustomModalComponent {
   @Input() visible: boolean = false;
   @Input() header?: string;
   @Input() style?: any;
-  @Input() form?: FormGroup;
+  @Input() noChange: boolean = false;
+  @Input() noFooter: boolean = false;
 
   constructor() {}
 
   hideDialog() {
+    console.log(this.noFooter);
+
     this.hide.emit();
   }
 
   submit() {
-    this.submitForm.emit(this.form);
+    this.submitForm.emit();
   }
 }

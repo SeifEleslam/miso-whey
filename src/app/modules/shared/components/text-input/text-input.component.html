@@ -1,0 +1,18 @@
+<label for="email" class="form-label">{{ title }}</label>
+<input
+  pInputText
+  [pattern]="pattern"
+  [formControl]="control"
+  [type]="type"
+  class="form-control"
+  [id]="id"
+  [name]="id"
+  [required]="required"
+  aria-describedby="emailHelp"
+  [ngClass]="{
+    'border-danger': control.invalid && (control.touched || submitted)
+  }"
+/>
+<ng-content
+  *ngIf="control.invalid && (control.touched || submitted)"
+></ng-content>

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MenuItem } from '../../interfaces/models/menuItem';
 import { CommonModule } from '@angular/common';
 
@@ -11,7 +11,19 @@ import { CommonModule } from '@angular/common';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
+  constructor(private router: Router) {}
+  ngOnInit(): void {
+    this.url = this.router.url;
+    console.log(this.url);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.url = event.urlAfterRedirects;
+        console.log(this.url);
+      }
+    });
+  }
+  url = '/';
   menuItems: MenuItem[] = [
     {
       label: 'Dashboard',

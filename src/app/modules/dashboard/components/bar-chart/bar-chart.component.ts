@@ -27,8 +27,6 @@ export class BarChartComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.charts.financialChartData().subscribe({
       next: (data) => {
-        console.log(data);
-
         const revenueData = data.data.map((el) => el.revenue);
         const expenseData = data.data.map((el) => el.expense);
         const labels = data.data.map((el) => el.month);

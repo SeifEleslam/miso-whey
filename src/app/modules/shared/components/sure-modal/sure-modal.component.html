@@ -1,0 +1,31 @@
+<p-dialog
+  [modal]="true"
+  [visible]="visible"
+  (visibleChange)="hideDialog()"
+  [header]="header"
+>
+  <ng-template pTemplate="content">
+    <ng-content></ng-content>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      [label]="'Cancel'"
+      icon="bi bi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+      [disabled]="loading"
+    ></button>
+    <button
+      (click)="save.emit()"
+      pButton
+      pRipple
+      [label]="'Yes'"
+      class="p-button-text"
+      [loading]="loading"
+    ></button>
+    <br />
+  </ng-template>
+</p-dialog>

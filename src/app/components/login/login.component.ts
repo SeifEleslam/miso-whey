@@ -31,7 +31,6 @@ export class LoginComponent {
   onSubmit() {
     // TODO: Use EventEmitter with form value
     if (this.loginForm.invalid) return;
-    console.log(this.loginForm.value);
     this.isLoading = true;
     this.auth
       .login(this.loginForm.value as Login)

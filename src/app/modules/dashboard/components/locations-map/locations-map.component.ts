@@ -33,7 +33,6 @@ export class LocationsMapComponent implements OnInit {
         this.directionsResults$ = this.mapDirectionsService
           .route(request)
           .pipe(map((response) => response.result));
-        console.log(this.locations);
       },
     });
   }

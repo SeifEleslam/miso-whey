@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ValidHintComponent } from './components/custom-modal/valid-hint/valid-hint.component';
+import { ValidHintComponent } from './components/valid-hint/valid-hint.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MainApiService } from '../../services/api/main.api.service';
 import { CustomTableComponent } from './components/custom-table/custom-table.component';
@@ -11,11 +11,16 @@ import { CardModule } from 'primeng/card';
 import { AuthService } from '../../services/api/auth.api.service';
 import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
 import { DialogModule } from 'primeng/dialog';
+import { TextInputComponent } from './components/text-input/text-input.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SureModalComponent } from './components/sure-modal/sure-modal.component';
 @NgModule({
   declarations: [
     ValidHintComponent,
     CustomTableComponent,
     CustomModalComponent,
+    TextInputComponent,
+    SureModalComponent,
   ],
   imports: [
     DialogModule,
@@ -25,12 +30,16 @@ import { DialogModule } from 'primeng/dialog';
     CommonModule,
     HttpClientModule,
     TableModule,
+    ReactiveFormsModule,
   ],
   exports: [
     CommonModule,
+    ButtonModule,
     ValidHintComponent,
     CustomTableComponent,
     CustomModalComponent,
+    TextInputComponent,
+    SureModalComponent,
   ],
   providers: [MainApiService, AuthService],
 })

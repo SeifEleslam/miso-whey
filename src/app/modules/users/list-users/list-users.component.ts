@@ -15,14 +15,16 @@ import { UsersApiService } from '../../../services/api/users.api.service';
 export class ListUsersComponent implements OnInit, OnDestroy {
   openModal = false;
   deleteUserDialog = false;
-  deleteUserData?: { id: number; name: string } | null;
-  selectedUser?: Partial<User> | null;
+  deleteUserData?: { id: number; name: string };
+  selectedUser?: Partial<User>;
   isLoading = false;
   UserDialog = false;
   users: User[] = [];
   records?: number;
   queryParams: Partial<Params> = {};
   destroyed = new Subject<void>();
+  modalHeader = '';
+  approach?: 'edit' | 'create' | 'show';
 
   constructor(
     private router: Router,
@@ -64,6 +66,8 @@ export class ListUsersComponent implements OnInit, OnDestroy {
 
   // Dialog functions
   openNew() {
+    this.modalHeader = 'Create User';
+    this.approach = 'create';
     this.selectedUser = {
       name: '',
     };
@@ -71,11 +75,20 @@ export class ListUsersComponent implements OnInit, OnDestroy {
   }
 
   hideDialog() {
-    this.selectedUser = null;
+    this.selectedUser = undefined;
     this.UserDialog = false;
+    this.approach = undefined;
   }
 
   editUser(id: number) {
+    this.modalHeader = 'Edit User';
+    this.approach = 'edit';
+    this.selectedUser = this.users.find((user) => user.id === id);
+    this.UserDialog = true;
+  }
+  showUser(id: number) {
+    this.modalHeader = 'User Details';
+    this.approach = 'show';
     this.selectedUser = this.users.find((user) => user.id === id);
     this.UserDialog = true;
   }
@@ -94,7 +107,7 @@ export class ListUsersComponent implements OnInit, OnDestroy {
   }
 
   hideDeleteUser() {
-    this.deleteUserData = null;
+    this.deleteUserData = undefined;
     this.deleteUserDialog = false;
   }
 
@@ -104,15 +117,18 @@ export class ListUsersComponent implements OnInit, OnDestroy {
       return;
     }
     this.isLoading = true;
-    // this.userAPI.deleteUser(this.deleteUserData.id)
-    //   .subscribe((res) => {
-    //     this.getUsersTableData();
-    //     this.notifyService.success(res.message);
-    //   })
-    //   .add(() => {
-    //     this.deleteUserDialog = false;
-    //     this.deleteUserData = null;
-    //   });
+    this.userAPI
+      .deleteUser(this.deleteUserData.id)
+      .subscribe({
+        next: (res) => {
+          this.getUsersTableData();
+        },
+        error: () => (this.isLoading = false),
+      })
+      .add(() => {
+        this.deleteUserDialog = false;
+        this.deleteUserData = undefined;
+      });
   }
 
   getUsersTableData() {
@@ -121,7 +137,6 @@ export class ListUsersComponent implements OnInit, OnDestroy {
       .listUsers(this.queryParams)
       .subscribe((res) => {
         this.users = res;
-        console.log(this.users);
       })
       .add(() => (this.isLoading = false));
   }

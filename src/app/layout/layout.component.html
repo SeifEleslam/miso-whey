@@ -1,16 +1,19 @@
 <div class="vh-100 vw-100 bg-light d-flex flex-column">
-  <app-header></app-header>
+  <app-header (toggleMenu)="toggleMenu()"></app-header>
   <div
     style="padding: 10px; padding-top: 70px; overflow: auto"
     class="vh-100 vw-100 d-flex"
   >
     <div
-      style="flex: 0 0 220px; position: sticky; top: 1rem"
-      class="p-3 shadow-sm border-0 rounded bg-white m-3"
+      id="sidebar"
+      style="flex: 0 0 220px; position: sticky; top: 1rem; border-radius: 20px"
+      class="p-3 shadow border bg-white m-3"
+      [ngClass]="{ 'menu-close': !menuOpen }"
     >
       <app-sidebar></app-sidebar>
     </div>
-    <div class="p-3 m-3" style="flex-grow: 1; flex-shrink: 1; min-width: 0">
+
+    <div class="m-3" style="flex-grow: 1; flex-shrink: 1; min-width: 0">
       <router-outlet></router-outlet>
       <br />
     </div>

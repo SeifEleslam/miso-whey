@@ -1,4 +1,7 @@
-<div class="border bg-white">
+<div
+  class="border shadow bg-white"
+  style="overflow: hidden; border-radius: 20px"
+>
   <p-table
     #dt1
     [value]="items"
@@ -78,7 +81,7 @@
               style="font-size: 20px"
               icon="bi bi-eye"
               class="p-button-link rounded-circle text-info"
-              (click)="showProduct(item)"
+              (click)="showProduct(item[key])"
             ></button>
             <button
               pButton

@@ -7,10 +7,16 @@ import { UsersApiService } from '../../services/api/users.api.service';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { UserModalComponent } from './components/user-modal/user-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UtilsService } from '../../services/utils.service';
 
 @NgModule({
   declarations: [ListUsersComponent, UserModalComponent],
-  providers: [provideRouter(routes), ParamsService, UsersApiService],
+  providers: [
+    provideRouter(routes),
+    ParamsService,
+    UsersApiService,
+    UtilsService,
+  ],
   imports: [SharedModule, ReactiveFormsModule],
 })
 export class UsersModule {}

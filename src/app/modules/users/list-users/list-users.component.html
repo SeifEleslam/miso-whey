@@ -1,3 +1,18 @@
+<div
+  class="mb-3"
+  style="display: flex; justify-content: space-between; align-items: center"
+>
+  <h5 class="m-0"></h5>
+  <div>
+    <button
+      (click)="openNew()"
+      class="btn btn-dark text-white"
+      style="width: 200px; margin: 0 auto"
+    >
+      Add User
+    </button>
+  </div>
+</div>
 <app-custom-table
   key="id"
   title="Users"
@@ -6,4 +21,22 @@
   [isLoading]="isLoading"
   (delete)="deleteUser($event)"
   (edit)="editUser($event)"
+  (show)="showUser($event)"
 ></app-custom-table>
+<app-user-modal
+  [user]="selectedUser"
+  [isOpen]="UserDialog"
+  [header]="modalHeader"
+  (hide)="hideDialog()"
+  [approach]="approach"
+  (saveSucceeded)="saveSucceeded()"
+></app-user-modal>
+<app-sure-modal
+  [header]="'Del Assurance'"
+  [loading]="isLoading"
+  [visible]="deleteUserDialog"
+  (hide)="hideDeleteUser()"
+  (save)="confirmDelete()"
+>
+  Are u sure u want to del {{ deleteUserData?.name }}
+</app-sure-modal>

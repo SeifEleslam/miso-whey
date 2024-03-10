@@ -1,9 +1,9 @@
-<li
+<a
   class="nav-item list-group-item mb-3"
   style="cursor: pointer; border-radius: 999px"
+  [ngClass]="{ 'bg-warning border-white text-white': isActive }"
+  [routerLink]="link"
 >
-  <a class="nav-link d-flex align-items-center" [routerLink]="link">
-    <i *ngIf="icon" class="{{ icon }}"></i>
-    <span class="ms-2">{{ label }}</span>
-  </a>
-</li>
+  <i *ngIf="icon" class="{{ icon }}"></i>
+  <span class="ms-2">{{ label }}</span>
+</a>

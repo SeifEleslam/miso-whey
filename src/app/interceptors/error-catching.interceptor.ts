@@ -18,8 +18,6 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    console.log('d');
-
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         switch (error.status) {
@@ -27,8 +25,6 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
             this.storage.logout();
             break;
         }
-        console.log(error);
-
         return throwError(() => error);
       })
     );

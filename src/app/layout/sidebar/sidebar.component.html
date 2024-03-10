@@ -4,5 +4,7 @@
     [link]="item.routerLink"
     [icon]="item.icon"
     [label]="item.label"
-  ></app-menu-item>
+    [isActive]="url.includes('/' + item.routerLink[0])"
+  >
+  </app-menu-item>
 </ul>

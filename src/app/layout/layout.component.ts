@@ -8,8 +8,13 @@ import { SharedModule } from '../modules/shared/shared.module';
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [HeaderComponent, SidebarComponent, RouterOutlet],
+  imports: [HeaderComponent, SidebarComponent, RouterOutlet, SharedModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })
-export class LayoutComponent {}
+export class LayoutComponent {
+  menuOpen = false;
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;    
+  }
+}

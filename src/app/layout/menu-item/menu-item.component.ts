@@ -12,5 +12,7 @@ import { RouterLink, RouterModule } from '@angular/router';
 export class MenuItemComponent {
   @Input() icon: string = '';
   @Input() label: string = '';
+  @Input() isActive!: boolean;
+
   @Input() link: string | string[] = '';
 }
