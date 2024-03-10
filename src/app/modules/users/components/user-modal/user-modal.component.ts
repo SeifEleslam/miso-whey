@@ -112,6 +112,7 @@ export class UserModalComponent implements OnInit {
     this.hide.emit();
     this.submitted = false;
     this.userForm.reset(this.originalUser);
+    this.imageURL = undefined;
   }
   submit() {
     this.submitted = true;
